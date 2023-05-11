@@ -1,0 +1,14 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(246, 199, 199, 0.2);
+  width: 50%;
+  padding: 2rem;
+}
+
+.formWrapper {
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
