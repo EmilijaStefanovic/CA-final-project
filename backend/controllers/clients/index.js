@@ -3,26 +3,28 @@ import mongoose from 'mongoose';
 
 export async function createNewClient(req, res) {
   try {
-    const { email, fullName, visitDate, userId } = req.body;
+    const { email, fullName, visitDate, visitTime, userId } = req.body;
     const newClient = {
       email: '',
       fullName: '',
       visitDate: '',
+      visitTime: '',
       userId: new mongoose.Types.ObjectId(),
     };
 
     if (userId && email && fullName && visitDate) {
-      (newClient.email = email),
-        (newClient.fullName = fullName),
-        (newClient.visitDate = visitDate),
-        (newClient.userId = new mongoose.Types.ObjectId(userId));
+      newClient.email = email;
+      newClient.fullName = fullName;
+      newClient.visitDate = visitDate;
+      newClient.visitTime = visitTime;
+      newClient.userId = new mongoose.Types.ObjectId(userId);
     }
 
     const client = await ClientModel.create(newClient);
     res.json(client);
   } catch (error) {
     res.status(500).json({
-      message: `Invalid user Id or info: userId - ${userId} body - ${email}, ${fullName}, ${visitDate}`,
+      message: `Invalid user Id or info: userId - ${userId} body - ${email}, ${fullName}, ${visitDate}, ${visitTime}`,
     });
   }
 }

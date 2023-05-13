@@ -2,12 +2,19 @@ import axios from 'axios';
 
 const HOST = 'http://localhost:4000/clients';
 
-export async function createNewClient({ email, fullName, visitDate, userId }) {
+export async function createNewClient({
+  email,
+  fullName,
+  visitDate,
+  userId,
+  visitTime,
+}) {
   try {
     const res = await axios.post(HOST + '/client', {
       email,
       fullName,
       visitDate,
+      visitTime,
       userId,
     });
 

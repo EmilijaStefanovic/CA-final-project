@@ -22,7 +22,6 @@ export default function RegistrationForm() {
       email,
       password,
     };
-    console.log(body);
     const signUpResponse = await signUpRequest(body);
 
     if (signUpResponse) {
