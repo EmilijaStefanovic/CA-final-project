@@ -3,11 +3,11 @@ import axios from 'axios';
 const HOST = 'http://localhost:4000/clients';
 
 export async function createNewClient({
-  email,
   fullName,
+  email,
   visitDate,
-  userId,
   visitTime,
+  userId,
 }) {
   try {
     const res = await axios.post(HOST + '/client', {

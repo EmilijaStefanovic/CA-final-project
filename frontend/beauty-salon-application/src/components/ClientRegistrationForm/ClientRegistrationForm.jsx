@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import Input from './atoms/Input/Input';
 import Button from './atoms/Button/Button';
 import style from './ClientRegistrationForm.module.css';
-import axios from 'axios';
-
-const HOST = 'http://localhost:4000/clients';
+import { createNewClient } from '../../api-calls/clients';
 
 export default function ClientRegistrationForm() {
   // const [currentTime, setCurrentTime] = useState(getCurrentTime());
   // const [currentDate, setCurrentDate] = useState(getCurrentDate());
+
+  const [clients, setClients] = useState([]);
 
   const [clientFullName, setClientFullName] = useState('');
   const [clientEmail, setClientEmail] = useState('');
@@ -29,24 +29,24 @@ export default function ClientRegistrationForm() {
   //   const day = now.getDate().toString().padStart(2, '0');
   //   return `${year}-${month}-${day}`;
   // }
-  function name(e) {
-    e.preventDefault();
-    console.log(localStorage.getItem('loggedInUser'));
-  }
+
   async function submitHandler(event) {
     event.preventDefault();
-    try {
-      const res = await axios.post(HOST + '/client', {
-        clientEmail,
-        clientFullName,
-        clientVisitDate,
-        clientVisitTime,
-        userId: localStorage.getItem('loggedInUser'),
-      });
 
-      console.log(res.data);
-    } catch (error) {
-      console.log(error);
+    const newClient = await createNewClient({
+      fullName: clientFullName,
+      email: clientEmail,
+      visitDate: clientVisitDate,
+      visitTime: clientVisitTime,
+      userId: `ObjectId(${localStorage.getItem('loggedInUser')})`,
+    });
+
+    if (newClient) {
+      setClients((prev) => {
+        const clone = JSON.parse(JSON.stringify(prev));
+        clone.push(newClient);
+        return clone;
+      });
     }
 
     setClientFullName('');
@@ -60,14 +60,12 @@ export default function ClientRegistrationForm() {
           type={'text'}
           id={'name'}
           label={'Full Name'}
-          value={clientFullName}
           onChange={(e) => setClientFullName(e.target.value)}
         />
         <Input
           type={'email'}
           id={'email'}
           label={'Email'}
-          value={clientEmail}
           onChange={(e) => setClientEmail(e.target.value)}
         />
         <Input
@@ -85,7 +83,6 @@ export default function ClientRegistrationForm() {
           type={'time'}
           id={'time'}
           label={'Visit Time'}
-          value={clientVisitTime}
           onChange={(e) => setClientVisitTime(e.target.value)}
         />
 

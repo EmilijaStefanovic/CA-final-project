@@ -5,7 +5,6 @@ const ClientSchema = mongoose.Schema({
   fullName: { type: String, required: true },
   visitDate: { type: String, required: true },
   visitTime: { type: String, required: true },
-
   userId: mongoose.SchemaTypes.ObjectId,
 });
 
