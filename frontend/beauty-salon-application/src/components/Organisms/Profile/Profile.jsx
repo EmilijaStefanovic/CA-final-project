@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import style from './Profile.module.css';
 
 export default function Profile() {
   const navigate = useNavigate();
@@ -10,7 +11,7 @@ export default function Profile() {
   }
   return (
     <div>
-      <button type={'Submit'} onClick={signOutHandler}>
+      <button className={style.button} type={'Submit'} onClick={signOutHandler}>
         Sign Out
       </button>
     </div>

@@ -43,6 +43,11 @@ export default function ClientRegistrationForm({ setClients }) {
         return clone;
       });
     }
+
+    setClientEmail('');
+    setClientFullName('');
+    setClientVisitDate('');
+    setClientVisitTime('');
   }
 
   return (

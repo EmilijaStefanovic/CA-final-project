@@ -18,7 +18,12 @@
 
 .clientWrapper button {
   border: none;
+  padding: 0.3rem 1rem;
   border-radius: 0.3rem;
   background-color: var(--first-color);
   color: var(--fourth-color);
+}
+
+.clientWrapper button:hover {
+  opacity: 0.5;
 }
