@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Input from '../ClientRegistrationForm/atoms/Input/Input';
-import Button from '../ClientRegistrationForm/atoms/Button/Button';
-import { signInRequest } from '../../api-calls/auth';
+import { signInRequest } from '../../../api-calls/auth';
 
 export default function SignInForm() {
   const [email, setEmail] = useState('');
@@ -23,19 +21,19 @@ export default function SignInForm() {
   }
   return (
     <form onSubmit={submitHandler}>
-      <Input
-        label={'Email'}
-        id={'Email'}
-        type={'email'}
+      <label htmlFor='Email'>Email</label>
+      <input
+        id='Email'
+        type='email'
         onChange={(e) => setEmail(e.target.value)}
       />
-      <Input
-        label={'Password'}
-        id={'Password'}
-        type={'password'}
+      <label htmlFor='Password'>Password</label>
+      <input
+        id='Password'
+        type='password'
         onChange={(e) => setPassword(e.target.value)}
       />
-      <Button text={'SignIn'} type={'submit'} />
+      <button type='submit'>SignIn</button>
       <p>
         Not a user yet? <Link to='/auth/signup'>Register</Link>
       </p>

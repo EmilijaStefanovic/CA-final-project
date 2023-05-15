@@ -1,6 +1,6 @@
 import React from 'react';
-import Button from '../ClientRegistrationForm/atoms/Button/Button';
 import { deleteClientById } from '../../api-calls/clients/index';
+import style from './Client.module.css';
 
 export default function ClientList({
   fullName,
@@ -11,7 +11,6 @@ export default function ClientList({
   setClients,
 }) {
   function deleteButtonHandler() {
-    console.log(id);
     deleteClientById(id).then((res) => {
       setClients((prev) => {
         return prev.filter((client) => client._id !== id);
@@ -19,20 +18,22 @@ export default function ClientList({
     });
   }
   return (
-    <div>
-      <h3>
+    <div className={style.clientWrapper}>
+      <h4>
         Full Name <p>{fullName}</p>
-      </h3>
-      <h3>
+      </h4>
+      <h4>
         Email <p>{email}</p>
-      </h3>
-      <h2>
+      </h4>
+      <h4>
         Visit Date <p>{date}</p>
-      </h2>
-      <h2>
+      </h4>
+      <h4>
         Visit Time <p>{time}</p>
-      </h2>
-      <Button type={'button'} text={'Cancel'} onClick={deleteButtonHandler} />
+      </h4>
+      <button type='button' onClick={deleteButtonHandler}>
+        Cancel
+      </button>
     </div>
   );
 }

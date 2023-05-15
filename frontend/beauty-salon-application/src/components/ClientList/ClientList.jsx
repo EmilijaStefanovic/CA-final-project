@@ -1,27 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Client from '../Client/Client';
 import { getAllClients } from '../../api-calls/clients';
-import { useNavigate } from 'react-router-dom';
+import style from './ClientList.module.css';
 
-export default function ClientList() {
-  const [clients, setClients] = useState([]);
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const user = localStorage.getItem('loggedInUser');
-    if (!user) {
-      navigate('/auth/signin');
-    }
-  }, []);
-
+export default function ClientList({ clients, setClients }) {
   useEffect(() => {
     const id = localStorage.getItem('loggedInUser');
     getAllClients(id).then((data) => setClients(data));
-  }, []);
+  }, [setClients]);
 
   return (
-    <div>
+    <div className={style.wrapper}>
       {clients.map((client) => (
         <Client
           key={client._id}

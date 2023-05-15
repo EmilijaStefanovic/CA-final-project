@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
-import Input from './atoms/Input/Input';
-import Button from './atoms/Button/Button';
 import style from './ClientRegistrationForm.module.css';
 import { createNewClient } from '../../api-calls/clients';
 
-export default function ClientRegistrationForm() {
+export default function ClientRegistrationForm({ setClients }) {
   // const [currentTime, setCurrentTime] = useState(getCurrentTime());
   // const [currentDate, setCurrentDate] = useState(getCurrentDate());
-
-  const [clients, setClients] = useState([]);
 
   const [clientFullName, setClientFullName] = useState('');
   const [clientEmail, setClientEmail] = useState('');
@@ -32,13 +28,12 @@ export default function ClientRegistrationForm() {
 
   async function submitHandler(event) {
     event.preventDefault();
-
     const newClient = await createNewClient({
       fullName: clientFullName,
       email: clientEmail,
       visitDate: clientVisitDate,
       visitTime: clientVisitTime,
-      userId: `ObjectId(${localStorage.getItem('loggedInUser')})`,
+      userId: localStorage.getItem('loggedInUser'),
     });
 
     if (newClient) {
@@ -48,30 +43,29 @@ export default function ClientRegistrationForm() {
         return clone;
       });
     }
-
-    setClientFullName('');
-    setClientEmail('');
   }
 
   return (
     <div className={style.formWrapper}>
       <form className={style.form} onSubmit={submitHandler}>
-        <Input
-          type={'text'}
-          id={'name'}
-          label={'Full Name'}
+        <label htmlFor='name'>Full Name</label>
+        <input
+          type='text'
+          id='name'
+          value={clientFullName}
           onChange={(e) => setClientFullName(e.target.value)}
         />
-        <Input
-          type={'email'}
-          id={'email'}
-          label={'Email'}
+        <label htmlFor='email'>Email</label>
+        <input
+          type='email'
+          id='email'
+          value={clientEmail}
           onChange={(e) => setClientEmail(e.target.value)}
         />
-        <Input
-          type={'date'}
-          id={'date'}
-          label={'Visit Date'}
+        <label htmlFor='date'>Visit Date</label>
+        <input
+          type='date'
+          id='date'
           value={
             clientVisitDate
               ? new Date(clientVisitDate).toISOString().split('T')[0]
@@ -79,14 +73,14 @@ export default function ClientRegistrationForm() {
           }
           onChange={(e) => setClientVisitDate(e.target.value)}
         />
-        <Input
-          type={'time'}
-          id={'time'}
-          label={'Visit Time'}
+        <label htmlFor='time'>Visit Time</label>
+        <input
+          type='time'
+          id='time'
           onChange={(e) => setClientVisitTime(e.target.value)}
         />
 
-        <Button text={'Add'} type={'submit'} />
+        <button type='submit'>Add</button>
       </form>
     </div>
   );

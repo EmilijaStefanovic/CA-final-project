@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from '../ClientRegistrationForm/atoms/Button/Button';
 import { useNavigate } from 'react-router-dom';
 
 export default function Profile() {
@@ -11,7 +10,9 @@ export default function Profile() {
   }
   return (
     <div>
-      <Button type={'Submit'} text={'Sign Out'} onClick={signOutHandler} />
+      <button type={'Submit'} onClick={signOutHandler}>
+        Sign Out
+      </button>
     </div>
   );
 }

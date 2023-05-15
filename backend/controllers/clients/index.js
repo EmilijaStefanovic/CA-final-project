@@ -8,8 +8,8 @@ export async function createNewClient(req, res) {
 
     if (userId && email && fullName && visitDate) {
       const newClient = {
-        email,
         fullName,
+        email,
         visitDate,
         visitTime,
         userId: new mongoose.Types.ObjectId(userId),
@@ -36,11 +36,19 @@ export async function deleteClientById(req, res) {
   }
 }
 
-// export async function updateClientById(req, res){
-//   const { id } = req.params;
-//   const {email, fullName, visitDate, visitTime} = req.body;
-
-// }
+export async function updateClientById(req, res) {
+  try {
+    const { id } = req.params;
+    const { email, fullName, visitDate, visitTime } = req.body;
+    const client = await ClientModel.updateOne(
+      { _id: id },
+      { fullName, email, visitDate, visitTime }
+    );
+    res.json(client);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
 
 export async function getAllClientsById(req, res) {
   try {

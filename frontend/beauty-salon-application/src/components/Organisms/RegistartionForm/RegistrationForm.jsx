@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import Input from '../ClientRegistrationForm/atoms/Input/Input';
-import Button from '../ClientRegistrationForm/atoms/Button/Button';
-import { signUpRequest } from '../../api-calls/auth';
+import { signUpRequest } from '../../../api-calls/auth';
 import { Link, useNavigate } from 'react-router-dom';
 
 export default function RegistrationForm() {
@@ -43,35 +41,35 @@ export default function RegistrationForm() {
   }
   return (
     <form onSubmit={submitHandler}>
-      <Input
-        label={'First Name'}
-        id={'firstName'}
-        type={'text'}
+      <label htmlFor='firstName'>First Name</label>
+      <input
+        id='firstName'
+        type='text'
         value={firstName}
         onChange={(e) => setFirstName(e.target.value)}
       />
-      <Input
-        label={'Last Name'}
-        id={'lastName'}
-        type={'text'}
+      <label htmlFor='lastName'>Last Name</label>
+      <input
+        id='lastName'
+        type='text'
         value={lastName}
         onChange={(e) => setLastName(e.target.value)}
       />
-      <Input
-        label={'Email'}
-        id={'email'}
-        type={'email'}
+      <label htmlFor='email'>Email</label>
+      <input
+        id='email'
+        type='email'
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
-      <Input
-        label={'Password'}
-        id={'password'}
-        type={'password'}
+      <label htmlFor='password'>Password</label>
+      <input
+        id='password'
+        type='password'
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <Button type={'submit'} text={'Register'} />
+      <button type={'submit'}>SignUp</button>
       <p>
         If you have an account <Link to='/auth/signin'>SignIn</Link>
       </p>
